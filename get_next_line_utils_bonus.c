@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   • get_next_line_utils_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/02 15:32:23 by khaimer           #+#    #+#             */
-/*   Updated: 2022/12/11 18:44:45 by khaimer          ###   ########.fr       */
+/*   Created: 2022/12/11 18:14:50 by khaimer           #+#    #+#             */
+/*   Updated: 2022/12/11 18:41:41 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_first(char *static_string)
 {
