@@ -6,7 +6,7 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:32:23 by khaimer           #+#    #+#             */
-/*   Updated: 2022/12/11 18:44:45 by khaimer          ###   ########.fr       */
+/*   Updated: 2022/12/14 16:48:55 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,23 @@
 
 char	*get_first(char *static_string)
 {
-	char *line;
-	int i;
+	char	*line;
+	int		i;
 
 	i = 0;
-	while(static_string && static_string[i] != '\0' && static_string[i] != '\n')
+	while (static_string && static_string[i] && static_string[i] != '\n')
 		i++;
 	line = malloc(i + 2);
-	line[i+1] = '\0';
-	while(i >= 0)
+	line[i + 1] = '\0';
+	while (i >= 0)
 	{
 		line[i] = static_string[i];
 		i--;
+	}
+	if (ft_strlen(line) == 0)
+	{
+		free (line);
+		line = NULL;
 	}
 	return (line);
 }
@@ -35,17 +40,16 @@ char	*get_last(char *static_string)
 	char	*line;
 	int		i;
 	int		j;
-	int 	size;
-	
+	int		size;
+
 	i = 0;
 	j = 0;
-	while(static_string && static_string[i] != '\n' && static_string[i])
+	while (static_string && static_string[i] != '\n' && static_string[i])
 		i++;
-	if (ft_strlen(static_string)== i)
-		return(NULL);
+	if (ft_strlen(static_string) == i)
+		return (NULL);
 	size = ft_strlen(static_string) - i;
 	line = malloc(size + 1);
-	
 	while (size)
 	{
 		line[j] = static_string[i + 1];
@@ -54,43 +58,43 @@ char	*get_last(char *static_string)
 		size--;
 	}
 	line[j] = '\0';
-	return(line);
+	return (line);
 }
 
 int	ft_strchr(char *string, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(string[i] && string)
+	while (string[i] && string)
 	{
-		if(string[i] == c)
-			return(1);
+		if (string[i] == c)
+			return (1);
 		i++;
 	}	
-	return(0);
+	return (0);
 }
 
 int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str && str[i] != '\0')
+	while (str && str[i] != '\0')
 		i++;
-	return(i);
+	return (i);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int 	i;
-	int 	j;
+	int		i;
+	int		j;
 	char	*string;
 
 	i = 0;
 	j = 0;
 	string = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	while(s1 && s1[i])
+	while (s1 && s1[i])
 	{
 		string[i] = s1[i];
 		i++;
@@ -101,5 +105,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	string[j + i] = '\0';
-	return(string);	
+	free(s1);
+	return (string);
 }

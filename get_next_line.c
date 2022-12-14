@@ -6,48 +6,43 @@
 /*   By: khaimer <khaimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:34:44 by khaimer           #+#    #+#             */
-/*   Updated: 2022/12/11 19:21:31 by khaimer          ###   ########.fr       */
+/*   Updated: 2022/12/14 16:39:48 by khaimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*invalid_fd(char *string, char **static_string)
+{
+	free(string);
+	free(*static_string);
+	*static_string = NULL;
+	return (NULL);
+}
+
 char	*get_next_line(int fd)
 {
 	int			read_char;
 	char		*string;
-	char		*line;
-	char		*fre;
-	static char *static_string;
-	
+	char		*pointer;
+	static char	*static_string;
+
 	read_char = 1;
 	string = malloc(BUFFER_SIZE + 1);
-	while(read_char != 0)
+	while (read_char != 0)
 	{
 		read_char = read(fd, string, BUFFER_SIZE);
-		if(read_char < 0)
-		{
-			free(static_string);
-			free(string);
-			static_string = NULL;
-			return(NULL);
-		}
+		if (read_char < 0)
+			return (invalid_fd(string, &static_string));
 		string[read_char] = '\0';
-		fre = static_string;
-		static_string = ft_strjoin(static_string,string);
-		free (fre);
-		if(ft_strchr(string, '\n'))
-			break;
+		static_string = ft_strjoin(static_string, string);
+		if (ft_strchr(string, '\n'))
+			break ;
 	}
-	line = get_first(static_string);
-	if(ft_strlen(line) == 0)
-	{
-		free (line);
-		line = NULL;
-	}
-	fre = static_string;
-	static_string = get_last(static_string);
-	free (fre);
 	free (string);
-	return(line);
+	string = get_first(static_string);
+	pointer = static_string;
+	static_string = get_last(static_string);
+	free (pointer);
+	return (string);
 }
